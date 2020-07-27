@@ -7,14 +7,43 @@
 //
 
 import UIKit
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
+    var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        
+        FirebaseApp.configure()
+        
+        let currentUsers = Auth.auth().currentUser
+        
+        if currentUsers != nil {
+            let board = UIStoryboard(name: "Main", bundle: nil)
+           let tabbar = board.instantiateViewController(withIdentifier: "tabbarStoryboard")  as? UITabBarController
+            window?.makeKeyAndVisible()
+            window?.rootViewController = tabbar
+            
+        }
+        
+        
+//        let firestoreDatabase = Firestore.firestore()
+//        var firestoreReference : DocumentReference? = nil
+//
+//        firestoreDatabase.collection("Drinks").document().setData(["storeName" : "Walmart", "foodPrice" : "1.88", "foodName" : "Coca-Cola Bottle"])
+//       firestoreDatabase.collection("Drinks").document().setData(["storeName" : "Walmart", "foodPrice" : "1.74", "foodName" : "Diet Coke bottle"])
+//       firestoreDatabase.collection("Drinks").document().setData(["storeName" : "Walmart", "foodPrice" : "3.88", "foodName" : "Diet Coke Soda Can"])
+//         firestoreDatabase.collection("Drinks").document().setData(["storeName" : "Walmart", "foodPrice" : "6.96", "foodName" : "Folgers Classic Roast"])
+//         firestoreDatabase.collection("Drinks").document().setData(["storeName" : "Walmart", "foodPrice" : "5.75", "foodName" : "Coffee Mate 35oz"])
+        
+      
+                                     
+        
         return true
     }
 
