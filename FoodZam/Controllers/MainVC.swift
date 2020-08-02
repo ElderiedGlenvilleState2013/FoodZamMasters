@@ -23,12 +23,13 @@ class MainVC: UIViewController, UINavigationControllerDelegate,UIImagePickerCont
     var speechSynthesizer = AVSpeechSynthesizer()
     var priceArray = [String]()
     var budgetArray = [String]()
+    var foodProd : FoodProduct = FoodProduct()
 
     var identfierName : String = ""
     var bp = 0.00
     
     
-    var setBudget = Double(SetbudgetVC.saveBudgetText)
+    var setB = Double(SetbudgetVC.saveBudgetText)
     
     
    
@@ -178,7 +179,7 @@ class MainVC: UIViewController, UINavigationControllerDelegate,UIImagePickerCont
                     if let setBudget = document.get("setBudgetAmount") as? String {
                         self.navigationItem.title = setBudget
                         
-                        var nn = Double(self.navigationItem.title!)
+                       
                        // self.budgetPrice = (nn != nil ? nn : 0.0)!
                         self.budgetArray.append(setBudget)
                         self.budgetPrice = Double(self.budgetArray[0])!
@@ -209,12 +210,15 @@ class MainVC: UIViewController, UINavigationControllerDelegate,UIImagePickerCont
                               self.priceLbl.text = price
                             self.bp = Double(price)!
                             self.priceArray.append(price)
+                            self.foodProd.foodPrice = Double(price)
                           }
                           
                           if let nameOfStore = document.get("storeName") as? String {
                               self.storeName.text = nameOfStore
+                            self.foodProd.storeName = nameOfStore
                           }
                           
+                        print(self.foodProd)
                       }
                   }
               }
@@ -251,14 +255,20 @@ class MainVC: UIViewController, UINavigationControllerDelegate,UIImagePickerCont
        
         
         getBudgetDataDB()
-       // getStoreDataDB()
+       getStoreDataDB()
+        print(self.foodProd)
         
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-       //// getBudgetDataDB()
+        getBudgetDataDB()
        getStoreDataDB()
         
+    }
+    
+    @IBAction func setButtonPressed(_ sender: Any) {
+        getBudgetDataDB()
+        performSegue(withIdentifier: "SetBudget", sender: self)
     }
     
 
@@ -271,5 +281,12 @@ extension MainVC: AVSpeechSynthesizerDelegate {
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
         //finish utter
     }
+    
+}
+
+struct FoodProduct {
+    var foodName : String!
+    var foodPrice : Double!
+    var storeName : String!
     
 }

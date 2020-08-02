@@ -19,6 +19,9 @@
 		63D9911C24A87B5000538FD1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63D9911A24A87B5000538FD1 /* LaunchScreen.storyboard */; };
 		63D9912524A87BB600538FD1 /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D9912424A87BB600538FD1 /* MainVC.swift */; };
 		63D9912924A8907F00538FD1 /* SetbudgetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D9912824A8907F00538FD1 /* SetbudgetVC.swift */; };
+		63E28B8824D3B88C008B45C0 /* RecipePostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E28B8724D3B88C008B45C0 /* RecipePostViewController.swift */; };
+		63E28B8A24D3B8AA008B45C0 /* RecipeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E28B8924D3B8AA008B45C0 /* RecipeCell.swift */; };
+		63E28B8C24D3B8FC008B45C0 /* RecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E28B8B24D3B8FC008B45C0 /* RecipeViewController.swift */; };
 		B3E904786C8E49F7990A138E /* Pods_FoodZam.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5AE884D4578900ED8910451 /* Pods_FoodZam.framework */; };
 /* End PBXBuildFile section */
 
@@ -38,6 +41,9 @@
 		63D9911D24A87B5000538FD1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		63D9912424A87BB600538FD1 /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
 		63D9912824A8907F00538FD1 /* SetbudgetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetbudgetVC.swift; sourceTree = "<group>"; };
+		63E28B8724D3B88C008B45C0 /* RecipePostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipePostViewController.swift; sourceTree = "<group>"; };
+		63E28B8924D3B8AA008B45C0 /* RecipeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCell.swift; sourceTree = "<group>"; };
+		63E28B8B24D3B8FC008B45C0 /* RecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeViewController.swift; sourceTree = "<group>"; };
 		707661D7BC543926F008FA79 /* Pods-FoodZam.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodZam.release.xcconfig"; path = "Target Support Files/Pods-FoodZam/Pods-FoodZam.release.xcconfig"; sourceTree = "<group>"; };
 		B5AE884D4578900ED8910451 /* Pods_FoodZam.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FoodZam.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -61,6 +67,15 @@
 				707661D7BC543926F008FA79 /* Pods-FoodZam.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		633B889524D391F0001A7F1F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				63E28B8924D3B8AA008B45C0 /* RecipeCell.swift */,
+				63D9911524A87B4F00538FD1 /* Main.storyboard */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		637AFD2624B1317700FD285A /* Model */ = {
@@ -91,13 +106,13 @@
 		63D9910E24A87B4F00538FD1 /* FoodZam */ = {
 			isa = PBXGroup;
 			children = (
+				633B889524D391F0001A7F1F /* View */,
 				637AFD2624B1317700FD285A /* Model */,
 				63D9912324A87B8A00538FD1 /* Controllers */,
 				63D9910F24A87B4F00538FD1 /* AppDelegate.swift */,
 				63D9911124A87B4F00538FD1 /* SceneDelegate.swift */,
 				637AFD2224B12A9F00FD285A /* TestFoodClassifier.mlmodel */,
 				637AFD2424B12B1700FD285A /* GoogleService-Info.plist */,
-				63D9911524A87B4F00538FD1 /* Main.storyboard */,
 				63D9911824A87B5000538FD1 /* Assets.xcassets */,
 				63D9911A24A87B5000538FD1 /* LaunchScreen.storyboard */,
 				63D9911D24A87B5000538FD1 /* Info.plist */,
@@ -113,6 +128,8 @@
 				637AFD2724B17EE900FD285A /* LoginVC.swift */,
 				637AFD2924B17F0600FD285A /* CreateProfileVC.swift */,
 				6331C10F24CE75EE003BF041 /* ProfileVCViewController.swift */,
+				63E28B8724D3B88C008B45C0 /* RecipePostViewController.swift */,
+				63E28B8B24D3B8FC008B45C0 /* RecipeViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -246,7 +263,10 @@
 				63D9911024A87B4F00538FD1 /* AppDelegate.swift in Sources */,
 				637AFD2824B17EE900FD285A /* LoginVC.swift in Sources */,
 				63D9911224A87B4F00538FD1 /* SceneDelegate.swift in Sources */,
+				63E28B8C24D3B8FC008B45C0 /* RecipeViewController.swift in Sources */,
+				63E28B8A24D3B8AA008B45C0 /* RecipeCell.swift in Sources */,
 				637AFD2A24B17F0600FD285A /* CreateProfileVC.swift in Sources */,
+				63E28B8824D3B88C008B45C0 /* RecipePostViewController.swift in Sources */,
 				637AFD2324B12A9F00FD285A /* TestFoodClassifier.mlmodel in Sources */,
 				63D9912924A8907F00538FD1 /* SetbudgetVC.swift in Sources */,
 			);

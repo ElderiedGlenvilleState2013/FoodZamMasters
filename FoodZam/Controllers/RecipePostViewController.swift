@@ -1,18 +1,23 @@
 //
-//  ProfileVCViewController.swift
+//  RecipePostViewController.swift
 //  FoodZam
 //
-//  Created by dadDev on 7/26/20.
+//  Created by dadDev on 7/30/20.
 //  Copyright © 2020 dadDev. All rights reserved.
 //
 
 import UIKit
 
-class ProfileVCViewController: UIViewController {
+class RecipePostViewController: UIViewController {
 
-    @IBAction func signOut(_ sender: UIButton) {
+    @IBOutlet weak var foodImage: UIImageView!
+    
+    @IBOutlet weak var foodDescLabel: UITextField!
+    @IBOutlet weak var foodTypeTextField: UITextField!
+    @IBAction func saveButtonPressed(_ sender: Any) {
         
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
