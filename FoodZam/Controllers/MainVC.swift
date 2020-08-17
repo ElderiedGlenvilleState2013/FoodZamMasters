@@ -206,7 +206,7 @@ class MainVC: UIViewController, UINavigationControllerDelegate,UIImagePickerCont
         // adding sheet provide the camera data
            addingSheet()
         getStoreDataDB() // get storeDataDB get the food items from the database
-        navigationItem.title = "$ \(budgetPrice)" // display the budget prices from saved budget
+       // navigationItem.title = "$ \(budgetPrice)" // display the budget prices from saved budget
 
         
     }
