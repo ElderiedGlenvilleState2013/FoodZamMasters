@@ -274,6 +274,7 @@
                     <navigationItem key="navigationItem" id="PDy-hL-fRm"/>
                     <connections>
                         <outlet property="setbudetTextField" destination="3is-Bh-qXn" id="6Iz-gR-FKu"/>
+                        <segue destination="CSM-Sj-adT" kind="presentation" identifier="mainVC" modalPresentationStyle="fullScreen" id="aNI-2R-Snu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aXd-pg-dZb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -817,7 +818,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="PXM-Rc-IhY"/>
+        <segue reference="aNI-2R-Snu"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="camera.fill" catalog="system" width="128" height="96"/>

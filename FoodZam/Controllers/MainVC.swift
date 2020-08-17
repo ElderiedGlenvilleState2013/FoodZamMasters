@@ -106,7 +106,6 @@ class MainVC: UIViewController, UINavigationControllerDelegate,UIImagePickerCont
                 } else if let appleResults = results.first {
                     if appleResults.identifier.contains("Apples") {
                         self.identfierName = appleResults.identifier
-                        self.budgetPrice = 3.99
                         self.navigationItem.title = "$\(self.budgetPrice)"
                         self.foodNameLbl.text = "Apples"
                         self.navigationController?.navigationBar.barTintColor = UIColor.green
@@ -114,8 +113,7 @@ class MainVC: UIViewController, UINavigationControllerDelegate,UIImagePickerCont
                         if let grapeResult = results.first {
                             if grapeResult.identifier.contains("Grapes") {
                                 self.identfierName = grapeResult.identifier
-                                //self.budgetPrice -= self.bp
-                                self.budgetPrice = 3.00
+                                self.budgetPrice -= self.bp
                                 self.navigationItem.title = "$\(self.budgetPrice)"
                                 self.foodNameLbl.text = "Grapes"
                                 self.navigationController?.navigationBar.barTintColor = UIColor.green
@@ -125,7 +123,6 @@ class MainVC: UIViewController, UINavigationControllerDelegate,UIImagePickerCont
                             if let iceCreamResult = results.first {
                                 if iceCreamResult.identifier.contains("Great Value Vanilla Ice Cream") {
                                     self.identfierName = iceCreamResult.identifier
-                                    self.budgetPrice -= 1.99
                                     self.navigationItem.title = "$\(self.budgetPrice)"
                                     self.navigationController?.navigationBar.barTintColor = UIColor.green
                                     self.foodNameLbl.text = iceCreamResult.identifier
@@ -134,7 +131,7 @@ class MainVC: UIViewController, UINavigationControllerDelegate,UIImagePickerCont
                                 if let bananaResult = results.first {
                                     if bananaResult.identifier.contains("Banana") {
                                         self.identfierName = bananaResult.identifier
-                                        self.budgetPrice -= 1.50
+                                        //self.budgetPrice -= 1.50
                                         self.navigationItem.title = "$\(self.budgetPrice)"
                                         self.navigationController?.navigationBar.barTintColor = UIColor.green
                                         self.foodNameLbl.text = "Banana"
@@ -166,35 +163,7 @@ class MainVC: UIViewController, UINavigationControllerDelegate,UIImagePickerCont
     }
     
     
-    func getBudgetDataDB() {
-        let fireStoreDB = Firestore.firestore()
-        
-         fireStoreDB.collection("Budgets").whereField("budgetSetBy", isEqualTo: Auth.auth().currentUser?.email! as Any).addSnapshotListener(includeMetadataChanges: true) { (snapshot, error) in
-            if error != nil {
-                print(error?.localizedDescription ?? "cannot find budget")
-            } else {
-                
-                for document in snapshot!.documents {
-                    
-                    if let setBudget = document.get("setBudgetAmount") as? String {
-                        var i = Int(setBudget)
-                        self.navigationItem.title = "$\(String(describing: i)).00"
-                        print("Goku \(setBudget)")
-                        
-                        
-                        
-                       // self.budgetPrice = (nn != nil ? nn : 0.0)!
-                       // self.budgetArray.append(setBudget)
-                       // self.budgetPrice = Double(self.navigationItem.title!)!
-                        
-                        
-                    }
-                  
-                    
-                }
-            }
-        }
-    }
+   
    
     
     func getStoreDataDB() {
@@ -234,13 +203,10 @@ class MainVC: UIViewController, UINavigationControllerDelegate,UIImagePickerCont
        }
     
     @IBAction func cameraButtonPressed(_ sender: Any) {
+        // adding sheet provide the camera data
            addingSheet()
-       getBudgetDataDB()
-        
-        
-        getStoreDataDB()
-        
-
+        getStoreDataDB() // get storeDataDB get the food items from the database
+        navigationItem.title = "$ \(budgetPrice)" // display the budget prices from saved budget
 
         
     }
@@ -259,14 +225,15 @@ class MainVC: UIViewController, UINavigationControllerDelegate,UIImagePickerCont
         
         
         getStoreDataDB()
-        getBudgetDataDB()
+       // getBudgetDataDB()
+        navigationItem.title = "$ \(budgetPrice)"
         
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-       getBudgetDataDB()
+      
        getStoreDataDB()
-        
+        navigationItem.title = "$ \(budgetPrice)"
         
     }
     
@@ -279,16 +246,7 @@ class MainVC: UIViewController, UINavigationControllerDelegate,UIImagePickerCont
     }
     
 
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "mainVC" {
-            getBudgetDataDB()
-//        let desVC = segue.destination as! SetbudgetVC
-//        desVC.bmiValue = calculateBrain.getBmiValue()
-//        desVC.advice = calculateBrain.getAdvice()
-//        desVC.color = calculateBrain.getColor()
-        
-        }
-    }
+
    
 
 }

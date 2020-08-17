@@ -15,44 +15,18 @@ class SetbudgetVC: UIViewController , UINavigationControllerDelegate{
     
     var budgetArray = [String]()
     static var saveBudgetText = ""
+    var budgetPrice = 0.00
     
-    func makeAlert(titleInput: String, messageInput: String ) {
-                let alert = UIAlertController(title: titleInput, message: messageInput, preferredStyle: UIAlertController.Style.alert)
-                    
-                          let okButton = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil)
-                          
-                          alert.addAction(okButton)
-                          present(alert, animated: true, completion: nil)
-                
-            }
+  
     
-    func sendToDB() {
-       
-            
-             
-             let firestoreDatabase = Firestore.firestore()
-             var firestoreReference : DocumentReference? = nil
-             
-             let firestorePost = ["budgetSetBy" :  Auth.auth().currentUser?.email!, "setBudgetAmount" : self.setbudetTextField.text!, "date" : FieldValue.serverTimestamp(),]  as [String : Any]
-             
-             firestoreReference = firestoreDatabase.collection("Budgets").addDocument(data: firestorePost, completion: { (error) in
-                                            
-                                            if error != nil {
-                                                self.makeAlert(titleInput: "Error", messageInput: error?.localizedDescription ?? "Error")
-                                            } else {
-                                                self.makeAlert(titleInput: "Good", messageInput: "sent success")
-                                                self.setbudetTextField.text = ""
-                                                self.tabBarController?.selectedIndex = 0
-                                                self.makeAlert(titleInput: "Post", messageInput: "your comment was uploaded successfully")
-                                            }
-                                        })
-    }
-    
-    @IBAction func sendbtnPressed(_ sender: Any) {
+    @IBAction func sendbtnPressed(_ sender: UIButton) {
         
-        sendToDB()
-        dismiss(animated: true, completion: nil)
-        //performSegue(withIdentifier: "mainVC", sender: nil)
+        
+        var st = Double(setbudetTextField.text!)
+        budgetPrice = st!
+        
+        performSegue(withIdentifier: "mainVC", sender: self)
+       
     }
 
     override func viewDidLoad() {
@@ -61,6 +35,15 @@ class SetbudgetVC: UIViewController , UINavigationControllerDelegate{
         // Do any additional setup after loading the view.
     }
     
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "mainVC" {
+           let barViewControllers = segue.destination as! UITabBarController
+           let nav = barViewControllers.viewControllers![0] as! UINavigationController
+           let destinationViewController = nav.viewControllers[0] as! MainVC
+            destinationViewController.budgetPrice = self.budgetPrice
+        }
+    }
 
     
 
