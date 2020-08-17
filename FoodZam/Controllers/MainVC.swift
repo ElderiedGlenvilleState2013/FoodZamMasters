@@ -23,7 +23,7 @@ class MainVC: UIViewController, UINavigationControllerDelegate,UIImagePickerCont
     var speechSynthesizer = AVSpeechSynthesizer()
     var priceArray = [String]()
     var budgetArray = [String]()
-    var foodProd : FoodProduct = FoodProduct()
+    var quoteListener: ListenerRegistration!
 
     var identfierName : String = ""
     var bp = 0.00
@@ -169,20 +169,23 @@ class MainVC: UIViewController, UINavigationControllerDelegate,UIImagePickerCont
     func getBudgetDataDB() {
         let fireStoreDB = Firestore.firestore()
         
-        fireStoreDB.collection("Budgets").whereField("budgetSetBy", isEqualTo: Auth.auth().currentUser?.email).addSnapshotListener { (snapshot, error) in
+         fireStoreDB.collection("Budgets").whereField("budgetSetBy", isEqualTo: Auth.auth().currentUser?.email! as Any).addSnapshotListener(includeMetadataChanges: true) { (snapshot, error) in
             if error != nil {
-                print(error?.localizedDescription)
+                print(error?.localizedDescription ?? "cannot find budget")
             } else {
                 
                 for document in snapshot!.documents {
                     
                     if let setBudget = document.get("setBudgetAmount") as? String {
-                        self.navigationItem.title = setBudget
+                        var i = Int(setBudget)
+                        self.navigationItem.title = "$\(String(describing: i)).00"
+                        print("Goku \(setBudget)")
                         
-                       
+                        
+                        
                        // self.budgetPrice = (nn != nil ? nn : 0.0)!
-                        self.budgetArray.append(setBudget)
-                        self.budgetPrice = Double(self.budgetArray[0])!
+                       // self.budgetArray.append(setBudget)
+                       // self.budgetPrice = Double(self.navigationItem.title!)!
                         
                         
                     }
@@ -192,7 +195,7 @@ class MainVC: UIViewController, UINavigationControllerDelegate,UIImagePickerCont
             }
         }
     }
-    
+   
     
     func getStoreDataDB() {
         let fireStoreDB = Firestore.firestore()
@@ -210,15 +213,15 @@ class MainVC: UIViewController, UINavigationControllerDelegate,UIImagePickerCont
                               self.priceLbl.text = price
                             self.bp = Double(price)!
                             self.priceArray.append(price)
-                            self.foodProd.foodPrice = Double(price)
+                            
                           }
                           
                           if let nameOfStore = document.get("storeName") as? String {
                               self.storeName.text = nameOfStore
-                            self.foodProd.storeName = nameOfStore
+                           
                           }
                           
-                        print(self.foodProd)
+                        
                       }
                   }
               }
@@ -232,7 +235,7 @@ class MainVC: UIViewController, UINavigationControllerDelegate,UIImagePickerCont
     
     @IBAction func cameraButtonPressed(_ sender: Any) {
            addingSheet()
-       // getBudgetDataDB()
+       getBudgetDataDB()
         
         
         getStoreDataDB()
@@ -254,24 +257,38 @@ class MainVC: UIViewController, UINavigationControllerDelegate,UIImagePickerCont
               speechSynthesizer.delegate = self
        
         
+        
+        getStoreDataDB()
         getBudgetDataDB()
-       getStoreDataDB()
-        print(self.foodProd)
         
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        getBudgetDataDB()
+       getBudgetDataDB()
        getStoreDataDB()
+        
         
     }
     
     @IBAction func setButtonPressed(_ sender: Any) {
-        getBudgetDataDB()
+       
+        //getBudgetDataDB()
         performSegue(withIdentifier: "SetBudget", sender: self)
+        
+         
     }
     
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "mainVC" {
+            getBudgetDataDB()
+//        let desVC = segue.destination as! SetbudgetVC
+//        desVC.bmiValue = calculateBrain.getBmiValue()
+//        desVC.advice = calculateBrain.getAdvice()
+//        desVC.color = calculateBrain.getColor()
+        
+        }
+    }
    
 
 }
@@ -284,9 +301,4 @@ extension MainVC: AVSpeechSynthesizerDelegate {
     
 }
 
-struct FoodProduct {
-    var foodName : String!
-    var foodPrice : Double!
-    var storeName : String!
-    
-}
+

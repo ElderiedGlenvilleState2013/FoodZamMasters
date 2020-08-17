@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class SetbudgetVC: UIViewController {
+class SetbudgetVC: UIViewController , UINavigationControllerDelegate{
     
     @IBOutlet weak var setbudetTextField: UITextField!
     
@@ -27,8 +27,8 @@ class SetbudgetVC: UIViewController {
             }
     
     func sendToDB() {
-        let storage = Storage.storage()
-             let storageReference = storage.reference()
+       
+            
              
              let firestoreDatabase = Firestore.firestore()
              var firestoreReference : DocumentReference? = nil
@@ -40,9 +40,9 @@ class SetbudgetVC: UIViewController {
                                             if error != nil {
                                                 self.makeAlert(titleInput: "Error", messageInput: error?.localizedDescription ?? "Error")
                                             } else {
-                                                
+                                                self.makeAlert(titleInput: "Good", messageInput: "sent success")
                                                 self.setbudetTextField.text = ""
-                                                //self.tabBarController?.selectedIndex = 0
+                                                self.tabBarController?.selectedIndex = 0
                                                 self.makeAlert(titleInput: "Post", messageInput: "your comment was uploaded successfully")
                                             }
                                         })
@@ -51,7 +51,8 @@ class SetbudgetVC: UIViewController {
     @IBAction func sendbtnPressed(_ sender: Any) {
         
         sendToDB()
-        performSegue(withIdentifier: "mainVC", sender: nil)
+        dismiss(animated: true, completion: nil)
+        //performSegue(withIdentifier: "mainVC", sender: nil)
     }
 
     override func viewDidLoad() {

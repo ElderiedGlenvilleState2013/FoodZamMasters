@@ -66,7 +66,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1957.9710144927537" y="133.92857142857142"/>
+            <point key="canvasLocation" x="1916" y="125"/>
         </scene>
         <!--Food-->
         <scene sceneID="TnQ-ir-VsC">
@@ -264,7 +264,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <connections>
-                                    <action selector="sendbtnPressed:" destination="OEb-aV-Wfv" eventType="touchUpInside" id="9fZ-TV-fuC"/>
+                                    <action selector="sendbtnPressed:" destination="OEb-aV-Wfv" eventType="touchUpInside" id="Tsp-yv-t2f"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -274,12 +274,11 @@
                     <navigationItem key="navigationItem" id="PDy-hL-fRm"/>
                     <connections>
                         <outlet property="setbudetTextField" destination="3is-Bh-qXn" id="6Iz-gR-FKu"/>
-                        <segue destination="CSM-Sj-adT" kind="presentation" identifier="mainVC" modalPresentationStyle="fullScreen" id="vQQ-mb-RqN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aXd-pg-dZb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-833" y="308"/>
+            <point key="canvasLocation" x="-1001" y="155"/>
         </scene>
         <!--LoginVC-->
         <scene sceneID="GJb-xx-rrW">
@@ -417,6 +416,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="cUQ-4D-jGJ"/>
                     </view>
+                    <navigationItem key="navigationItem" id="baF-4b-UKl"/>
                     <connections>
                         <outlet property="emailText" destination="29w-qK-Q2Q" id="uT5-f2-Y5e"/>
                         <outlet property="passwordText" destination="auO-Eu-uPu" id="64N-Dd-WXq"/>
@@ -426,7 +426,23 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xXX-E6-8C9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-571.01449275362324" y="1133.7053571428571"/>
+            <point key="canvasLocation" x="-1155" y="1138"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="cSq-ia-3Fe">
+            <objects>
+                <viewController id="kRY-XR-vlS" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="T6x-PS-rUM">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="XJo-qR-mAY"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item" image="mic.fill" catalog="system" id="yaM-Ql-YXt"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xGo-G7-Rom" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="650.72463768115949" y="1064.7321428571429"/>
         </scene>
         <!--profile-->
         <scene sceneID="X3S-WD-WzL">
@@ -436,15 +452,30 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LGx-Xc-bag">
-                                <rect key="frame" x="87" y="110" width="240" height="128"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="asA-Vq-dqQ">
+                                <rect key="frame" x="10" y="67" width="394" height="270"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
+                                <fontDescription key="fontDescription" type="system" pointSize="37"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6o0-c4-SWO">
+                                <rect key="frame" x="32" y="619" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="signOut:" destination="zJq-qC-S4Y" eventType="touchUpInside" id="WaO-4T-8nE"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="hxz-J4-dRm"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="profile" image="person.circle" catalog="system" id="2ea-Eh-Wuo"/>
+                    <connections>
+                        <outlet property="priceLbl" destination="asA-Vq-dqQ" id="yEJ-aQ-mz2"/>
+                        <segue destination="BxF-Ko-yb1" kind="presentation" identifier="toLoginVC" modalPresentationStyle="fullScreen" id="kVX-Hu-yxk"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KaG-K5-tZy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -594,7 +625,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h6x-Rf-HwM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="403" y="1272"/>
+            <point key="canvasLocation" x="-352" y="1185"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="xx1-W7-fkB">
@@ -695,7 +726,7 @@
         <scene sceneID="6BW-QM-jOS">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="SyB-Z8-EsF" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="FoodZam" image="camera" catalog="system" id="R4v-Ja-gpl"/>
+                    <tabBarItem key="tabBarItem" title="FoodZam" image="camera.fill" catalog="system" id="R4v-Ja-gpl"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Ttq-ci-9oa">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -723,6 +754,7 @@
                     <connections>
                         <segue destination="SyB-Z8-EsF" kind="relationship" relationship="viewControllers" id="OEw-nN-vQS"/>
                         <segue destination="zJq-qC-S4Y" kind="relationship" relationship="viewControllers" id="a2m-36-hey"/>
+                        <segue destination="kRY-XR-vlS" kind="relationship" relationship="viewControllers" id="Xm3-KL-xYp"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ugm-WC-xch" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -785,14 +817,14 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="ctw-LC-5Jl"/>
+        <segue reference="PXM-Rc-IhY"/>
     </inferredMetricsTieBreakers>
     <resources>
-        <image name="camera" catalog="system" width="128" height="96"/>
         <image name="camera.fill" catalog="system" width="128" height="96"/>
         <image name="camera.on.rectangle.fill" catalog="system" width="128" height="96"/>
         <image name="camera.viewfinder" catalog="system" width="128" height="114"/>
         <image name="folder.badge.plus" catalog="system" width="128" height="86"/>
+        <image name="mic.fill" catalog="system" width="108" height="128"/>
         <image name="person" catalog="system" width="128" height="117"/>
         <image name="person.circle" catalog="system" width="128" height="121"/>
         <image name="person.fill" catalog="system" width="128" height="120"/>
