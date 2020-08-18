@@ -21,8 +21,6 @@ class MainVC: UIViewController, UINavigationControllerDelegate,UIImagePickerCont
     var budgetPrice = 0.00
     let imagePicker = UIImagePickerController()
     var speechSynthesizer = AVSpeechSynthesizer()
-    var priceArray = [String]()
-    var budgetArray = [String]()
     var quoteListener: ListenerRegistration!
 
     var identfierName : String = ""
@@ -69,7 +67,7 @@ class MainVC: UIViewController, UINavigationControllerDelegate,UIImagePickerCont
               }
               
               detect(image: ciimage)
-              
+              addingItemToBudget()
           }
           
           imagePicker.dismiss(animated: true, completion: nil)
@@ -113,8 +111,9 @@ class MainVC: UIViewController, UINavigationControllerDelegate,UIImagePickerCont
                         if let grapeResult = results.first {
                             if grapeResult.identifier.contains("Grapes") {
                                 self.identfierName = grapeResult.identifier
-                                self.budgetPrice -= self.bp
-                                self.navigationItem.title = "$\(self.budgetPrice)"
+                                //self.budgetPrice -= self.bp
+                              
+                              //  self.addingItemToBudget()
                                 self.foodNameLbl.text = "Grapes"
                                 self.navigationController?.navigationBar.barTintColor = UIColor.green
                                 
@@ -135,6 +134,7 @@ class MainVC: UIViewController, UINavigationControllerDelegate,UIImagePickerCont
                                         self.navigationItem.title = "$\(self.budgetPrice)"
                                         self.navigationController?.navigationBar.barTintColor = UIColor.green
                                         self.foodNameLbl.text = "Banana"
+                                        
                                     }
                                 } else {
                                     self.navigationItem.title = "$\(self.budgetPrice)"
@@ -181,7 +181,7 @@ class MainVC: UIViewController, UINavigationControllerDelegate,UIImagePickerCont
                             
                               self.priceLbl.text = price
                             self.bp = Double(price)!
-                            self.priceArray.append(price)
+                            
                             
                           }
                           
@@ -202,12 +202,24 @@ class MainVC: UIViewController, UINavigationControllerDelegate,UIImagePickerCont
            
        }
     
+    func addingItemToBudget() {
+        if budgetPrice > 0.0 {
+            budgetPrice -= bp
+            navigationItem.title = "$\(budgetPrice)"
+        } else {
+            budgetPrice = 0.0
+            self.navigationController?.navigationBar.barTintColor = UIColor.red
+            
+        }
+        
+    }
+    
     @IBAction func cameraButtonPressed(_ sender: Any) {
         // adding sheet provide the camera data
            addingSheet()
+        //addingItemToBudget()
         getStoreDataDB() // get storeDataDB get the food items from the database
-       // navigationItem.title = "$ \(budgetPrice)" // display the budget prices from saved budget
-
+        //addingItemToBudget()
         
     }
        
@@ -226,6 +238,7 @@ class MainVC: UIViewController, UINavigationControllerDelegate,UIImagePickerCont
         
         getStoreDataDB()
        // getBudgetDataDB()
+        
         navigationItem.title = "$ \(budgetPrice)"
         
     }
@@ -233,9 +246,10 @@ class MainVC: UIViewController, UINavigationControllerDelegate,UIImagePickerCont
         super.viewWillAppear(animated)
       
        getStoreDataDB()
-        navigationItem.title = "$ \(budgetPrice)"
+       // navigationItem.title = "$ \(budgetPrice)"
         
     }
+    
     
     @IBAction func setButtonPressed(_ sender: Any) {
        

@@ -8,14 +8,17 @@
 
 import UIKit
 import Firebase
-
+import SDWebImage
 class ProfileVCViewController: UIViewController {
 
-    @IBOutlet weak var priceLbl: UILabel!
+    @IBOutlet weak var nameLabel: UILabel!
     
     
+    @IBOutlet weak var profileImage: UIImageView!
     
+    @IBOutlet weak var emailLabel: UILabel!
     
+    @IBOutlet weak var bioLabel: UILabel!
     
     @IBAction func signOut(_ sender: UIButton) {
         
@@ -57,23 +60,31 @@ class ProfileVCViewController: UIViewController {
     func getBudgetDataDB() {
         let fireStoreDB = Firestore.firestore()
         
-        fireStoreDB.collection("Budgets").whereField("budgetSetBy", isEqualTo: Auth.auth().currentUser?.email! as Any).addSnapshotListener { (snapshot, error) in
+        fireStoreDB.collection("Profiles").whereField("currentUserEmail", isEqualTo: Auth.auth().currentUser?.email! as Any).addSnapshotListener { (snapshot, error) in
             if error != nil {
                 print(error?.localizedDescription ?? "cannot find budget")
             } else {
                 
                 for document in snapshot!.documents {
                     
-                    if let setBudget = document.get("setBudgetAmount") as? String {
-                        self.priceLbl.text = setBudget
+                    if let setBudget = document.get("firstName") as? String {
+                        self.nameLabel.text = setBudget
                         
                         
                         
-                       // self.budgetPrice = (nn != nil ? nn : 0.0)!
-                       // self.budgetArray.append(setBudget)
-                       // self.budgetPrice = Double(self.navigationItem.title!)!
+                    }
+                    if let emailText = document.get("currentUserEmail") as? String {
+                        self.emailLabel.text = emailText
+                    }
+                    
+                    if let bioText = document.get("bio") as? String {
                         
+                        self.bioLabel.text = bioText
                         
+                    }
+                    
+                    if let imgeUrl = document.get("imageUrl") as? String {
+                        self.profileImage.sd_setImage(with: URL(string: imgeUrl))
                     }
                   
                     
