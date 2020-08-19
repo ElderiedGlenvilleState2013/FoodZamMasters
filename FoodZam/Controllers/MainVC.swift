@@ -75,9 +75,6 @@ class MainVC: UIViewController, UINavigationControllerDelegate,UIImagePickerCont
           
       }
     func detect(image: CIImage){
-        
-        
-        
         guard let model = try? VNCoreMLModel(for: TestFoodClassifier().model) else {
             fatalError("loading CoreML Model failed")
         }
@@ -87,9 +84,6 @@ class MainVC: UIViewController, UINavigationControllerDelegate,UIImagePickerCont
                 fatalError("model failed to process image")
             }
             print(results)
-            
-//            self.identfierName = results.first?.identifier as! String
-            
             if let oreoResults = results.first {
                 if oreoResults.identifier.contains("Oreo") {
                     self.identfierName = oreoResults.identifier
@@ -144,12 +138,15 @@ class MainVC: UIViewController, UINavigationControllerDelegate,UIImagePickerCont
                             }
                         }
                     }
-                    
-                   
-                    
                 }
-                
+            }else {
+                self.foodNameLbl.text = "Cannot find that Item"
+                self.priceLbl.text = "0.0"
+                self.navigationItem.title = "Cannot find item"
+                self.view.backgroundColor = UIColor.red
+                self.navigationController?.navigationBar.barTintColor = UIColor.red
             }
+            
         }
         
         let handler = VNImageRequestHandler(ciImage: image)

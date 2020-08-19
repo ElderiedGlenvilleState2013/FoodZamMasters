@@ -10,11 +10,13 @@ import UIKit
 
 class RecipeCell: UITableViewCell {
 
-    @IBOutlet weak var recipeDescLbl: UILabel!
-    @IBOutlet weak var recipeImage: UIImageView!
-    @IBOutlet weak var profileImg: UIImageView!
-    @IBOutlet weak var userNameLbl: UILabel!
+    @IBOutlet weak var userNameLabel: UILabel!
+    @IBOutlet weak var foodNameLabel: UILabel!
     @IBOutlet weak var foodTypeLabel: UILabel!
+    @IBOutlet weak var foodDescriptionLabel: UILabel!
+    @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var foodImage: UIImageView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
