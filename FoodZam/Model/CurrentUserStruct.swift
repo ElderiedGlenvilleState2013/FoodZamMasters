@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 
 // to get the users profile information
-class CurrentUserProfile {
+struct CurrentUserProfile {
     var currentUersEmail: String?
     var currentProfileImageURL : String?
     var currentUserId  = 0
@@ -22,7 +22,7 @@ class CurrentUserProfile {
      func getProfilesFB(){
            let firestoreDB = Firestore.firestore()
            
-           firestoreDB.collection("Profiles").addSnapshotListener { (snapshot, error) in
+           firestoreDB.collection("Profiles").whereField("currentUserEmail", isEqualTo: Auth.auth().currentUser?.email).addSnapshotListener { (snapshot, error) in
                if error != nil {
                    print(error?.localizedDescription)
                } else {
@@ -31,7 +31,8 @@ class CurrentUserProfile {
                        
                        for docs in snapshot!.documents {
                            if let profileImages = docs.get("imageUrl") as? String {
-                            self.currentProfileImageURL = profileImages
+                            
+                            CurrentUserProfile.instanc.currentProfileImageURL = profileImages
                            }
                         
                        }
@@ -49,7 +50,7 @@ class CurrentUserProfile {
         return self.currentProfileImageURL!
     }
     
-     func assigningUserId(){
+    mutating func assigningUserId(){
         if currentUserId <= 0 {
             self.currentUserId += 1
             

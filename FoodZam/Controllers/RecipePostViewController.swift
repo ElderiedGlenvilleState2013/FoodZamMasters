@@ -18,6 +18,7 @@ class RecipePostViewController: UIViewController,UIImagePickerControllerDelegate
     @IBOutlet weak var foodNameTextField: UITextField!
     
     var currentUserStruct = CurrentUserProfile()
+    var s = ""
     
     
     
@@ -72,7 +73,8 @@ class RecipePostViewController: UIViewController,UIImagePickerControllerDelegate
         foodNameTextField.delegate = self
     
         currentUserStruct.getProfilesFB()
-        print("GOKU: \(currentUserStruct.currentProfileImageURL)")
+        getProfilesFB()
+        print("GOKU: \(s)")
 
         foodImage.isUserInteractionEnabled = true
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(chooseImage))
@@ -105,6 +107,29 @@ class RecipePostViewController: UIViewController,UIImagePickerControllerDelegate
                      present(alert, animated: true, completion: nil)
            
        }
+    
+    func getProfilesFB(){
+             let firestoreDB = Firestore.firestore()
+             
+        firestoreDB.collection("Profiles").whereField("currentUserEmail", isEqualTo: Auth.auth().currentUser?.email).addSnapshotListener { (snapshot, error) in
+                 if error != nil {
+                     print(error?.localizedDescription)
+                 } else {
+                     if snapshot?.isEmpty != true && snapshot != nil {
+                         
+                         
+                         for docs in snapshot!.documents {
+                             if let profileImages = docs.get("imageUrl") as? String {
+                              
+                                self.s = profileImages
+                             }
+                          
+                         }
+                        
+                     }
+                 }
+             }
+         }
     
     func uploadPostToFirease() {
         let storage = Storage.storage()

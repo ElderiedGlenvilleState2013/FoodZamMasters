@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import SDWebImage
+import QuartzCore
 
 class RecipeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
@@ -38,6 +39,7 @@ class RecipeViewController: UIViewController, UITableViewDataSource, UITableView
       }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        CurrentUserProfile.instanc.getProfilesFB()
        // getFBProfile()
     }
       
@@ -123,6 +125,9 @@ class RecipeViewController: UIViewController, UITableViewDataSource, UITableView
         cell.userNameLabel.text = emailArray[indexPath.row]
         cell.foodImage.sd_setImage(with: URL(string: self.imagePostArray[indexPath.row]))
         cell.profileImageView.sd_setImage(with: URL(string: self.profileImageUrlArray[indexPath.row]))
+        cell.profileImageView.layer.cornerRadius = 25
+        cell.profileImageView.layer.borderWidth = 3.5
+    
         
           return cell
       }
@@ -145,11 +150,4 @@ class RecipeViewController: UIViewController, UITableViewDataSource, UITableView
 
 }
 
-struct RecipePosting {
-    var urlProfile : String
-    var urlPostImage: String
-    var typeOfFood: String
-    var nameOfFood: String
-    var foodDesc: String
-    var nameOfUser: String
-}
+
