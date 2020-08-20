@@ -14,9 +14,7 @@ class CreateProfileVC: UIViewController, UIImagePickerControllerDelegate, UINavi
     @IBOutlet weak var firstNameTextField: UITextField!
     @IBOutlet weak var lastNameTextField: UITextField!
     @IBOutlet weak var bioTextField: UITextField!
-    @IBOutlet weak var foodCat1TextField: UITextField!
-    @IBOutlet weak var foodCat2TextField: UITextField!
-    @IBOutlet weak var foodCat3TextField: UITextField!
+ 
     
     
     
@@ -33,9 +31,7 @@ class CreateProfileVC: UIViewController, UIImagePickerControllerDelegate, UINavi
         firstNameTextField.delegate = self
         lastNameTextField.delegate = self
         bioTextField.delegate = self
-        foodCat1TextField.delegate = self
-        foodCat2TextField.delegate = self
-        foodCat3TextField.delegate = self
+       
         
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -56,10 +52,8 @@ class CreateProfileVC: UIViewController, UIImagePickerControllerDelegate, UINavi
       func hideKeyboard(){
           firstNameTextField.resignFirstResponder()
           lastNameTextField.resignFirstResponder()
-        bioTextField.resignFirstResponder()
-        foodCat1TextField.resignFirstResponder()
-        foodCat2TextField.resignFirstResponder()
-        foodCat3TextField.resignFirstResponder()
+          bioTextField.resignFirstResponder()
+        
           
       }
       
@@ -71,7 +65,7 @@ class CreateProfileVC: UIViewController, UIImagePickerControllerDelegate, UINavi
           
           if  notification.name == UIResponder.keyboardWillShowNotification || notification.name == UIResponder.keyboardWillChangeFrameNotification {
               
-              view.frame.origin.y = -keyboardRect.height
+              view.frame.origin.y = -keyboardRect.height / 4
           } else {
               view.frame.origin.y = 0
           }
@@ -79,6 +73,11 @@ class CreateProfileVC: UIViewController, UIImagePickerControllerDelegate, UINavi
           
           
       }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        hideKeyboard()
+        
+        return true
+    }
     
 
     @objc func chooseImage() {
@@ -132,9 +131,6 @@ class CreateProfileVC: UIViewController, UIImagePickerControllerDelegate, UINavi
                                 "firstName" : self.firstNameTextField.text,
                                 "lastName" : self.lastNameTextField.text,
                                 "imageUrl" : imageUrl,
-                                "foodCategory1" : self.foodCat1TextField.text,
-                                "foodCategory2" : self.foodCat2TextField.text,
-                                "foodCategory3" : self.foodCat3TextField.text,
                                 "bio" : self.bioTextField.text,
                                 
                             ] // end of dictionary

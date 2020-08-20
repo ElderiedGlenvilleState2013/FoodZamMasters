@@ -7,60 +7,131 @@
 //
 
 import UIKit
+import Firebase
+import SDWebImage
 
 class RecipeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-    var userNameArray = [String]()
-    var profileImageArray = [String]()
-    var foodDescArray = [String]()
-    var foodTypeArray = [String]()
-    var likeArray = [Int]()
-    var documentIdArray = [String]()
     
-    
-    
-    func getFBProfile() {
-        
-    }
-    
-    func getFBPost() {
-        
-    }
-    
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return profileImageArray.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = recipeTableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! RecipeCell
-        
-        return cell
-    }
-    
-    
-    
+    var emailArray = [String]()
+    var imagePostArray = [String]()
+    var nameArray = [String]()
+    var foodDescriptionArray = [String]()
+    var typeOfFoodArray = [String]()
+    var likesArray = [Int]()
+    var documentsIdArray = [String]()
+    var profileImageUrlArray = [String]()
     
     @IBOutlet weak var recipeTableView: UITableView!
     
     
-    @IBAction func postButtonPressed(_ sender: Any) {
+    override func viewDidLoad() {
+          super.viewDidLoad()
+
+          recipeTableView.delegate = self
+          recipeTableView.dataSource = self
+          
+        CurrentUserProfile.instanc.getProfilesFB()
         
+          getFBPost()
+        
+      }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+       // getFBProfile()
+    }
+      
+    @IBAction func postButtonPressed(_ sender: Any) {
+        CurrentUserProfile.instanc.getProfilesFB()
+        print("Gohan \(CurrentUserProfile.instanc.currentProfileImageURL)")
         performSegue(withIdentifier: "PostVC", sender: nil)
     }
     
     
-    
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        recipeTableView.delegate = self
-        recipeTableView.dataSource = self
+      
+      func getFBPost() {
+          let firestoreDatabase = Firestore.firestore()
+                
+                firestoreDatabase.collection("Posts").order(by: "date", descending: true).addSnapshotListener { (snapshot, error) in
+                    if error != nil {
+                        print(error?.localizedDescription)
+                        
+                    } else {
+                        if snapshot?.isEmpty != true && snapshot != nil {
+                            self.emailArray.removeAll(keepingCapacity: true)
+                            self.profileImageUrlArray.removeAll(keepingCapacity: true)
+                            self.foodDescriptionArray.removeAll(keepingCapacity: true)
+                            self.typeOfFoodArray.removeAll(keepingCapacity: true)
+                            self.documentsIdArray.removeAll(keepingCapacity: true)
+                            self.imagePostArray.removeAll(keepingCapacity: true)
+                            for document in snapshot!.documents {
+                                let documentID = document.documentID
+                                self.documentsIdArray.append(documentID)
+                                print(documentID)
+                                
+                                if let postedBy = document.get("postedBy")  as? String {
+                                    print(postedBy)
+                                    self.emailArray.append(postedBy)
+                                   // self.r.nameOfUser = postedBy
+                                    
+                                }
+                                
+                                if let postComment = document.get("foodType") as? String {
+                                    self.typeOfFoodArray.append(postComment)
+                                   // self.r.typeOfFood = postComment
+                                }
+                                if let foodPost = document.get("foodDescription") as? String {
+                                    self.foodDescriptionArray.append(foodPost)
+                                    //self.r.foodDesc = foodPost
+                                    
+                                }
+                                if let names = document.get("foodName") as? String{
+                                    self.nameArray.append(names)
+                                    //self.r.nameOfFood = names
+                                    
+                                }
+                                
+                                if let imageUrl = document.get("imageUrl") as? String {
+                                    self.imagePostArray.append(imageUrl)
+                                   // self.r.urlPostImage = imageUrl
+                                    
+                                }
+                                if let profileImages = document.get("profileImageUrl") as? String {
+                                    self.profileImageUrlArray.append(profileImages)
+                                    
+                                }
+                                
+                            }
+                            //self.recipePostingArray.append(self.r)
+                           
+                            self.recipeTableView.reloadData()
+                        }
+                    }
+                }
+      }
+      
+      
+      func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return  emailArray.count
+      }
+      
+      func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+          let cell = recipeTableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! RecipeCell
+        cell.foodDescriptionLabel.text = foodDescriptionArray[indexPath.row]
+        cell.foodNameLabel.text = nameArray[indexPath.row]
+        cell.foodTypeLabel.text = typeOfFoodArray[indexPath.row]
+        cell.userNameLabel.text = emailArray[indexPath.row]
+        cell.foodImage.sd_setImage(with: URL(string: self.imagePostArray[indexPath.row]))
+        cell.profileImageView.sd_setImage(with: URL(string: self.profileImageUrlArray[indexPath.row]))
         
-        // Do any additional setup after loading the view.
+          return cell
+      }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 650
     }
     
+  
 
     /*
     // MARK: - Navigation
@@ -72,4 +143,13 @@ class RecipeViewController: UIViewController, UITableViewDataSource, UITableView
     }
     */
 
+}
+
+struct RecipePosting {
+    var urlProfile : String
+    var urlPostImage: String
+    var typeOfFood: String
+    var nameOfFood: String
+    var foodDesc: String
+    var nameOfUser: String
 }

@@ -17,6 +17,7 @@ class RecipePostViewController: UIViewController,UIImagePickerControllerDelegate
     @IBOutlet weak var foodTypeTextField: UITextField!
     @IBOutlet weak var foodNameTextField: UITextField!
     
+    var currentUserStruct = CurrentUserProfile()
     
     
     
@@ -70,6 +71,8 @@ class RecipePostViewController: UIViewController,UIImagePickerControllerDelegate
        foodTypeTextField.delegate = self
         foodNameTextField.delegate = self
     
+        currentUserStruct.getProfilesFB()
+        print("GOKU: \(currentUserStruct.currentProfileImageURL)")
 
         foodImage.isUserInteractionEnabled = true
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(chooseImage))
@@ -128,7 +131,14 @@ class RecipePostViewController: UIViewController,UIImagePickerControllerDelegate
                             let firestoreDatabase = Firestore.firestore()
                             var firestoreReference : DocumentReference? = nil
                             
-                            let firestorePost = ["imageUrl" : imageUrl, "postedBy" :  Auth.auth().currentUser?.email!,"foodType": self.foodTypeTextField.text!,"foodDescription": self.foodDescLabel.text!, "foodName" : self.foodNameTextField.text!, "date" : FieldValue.serverTimestamp(), "likes" :  0]  as [String : Any]
+                            let firestorePost = [
+                                "imageUrl" : imageUrl,
+                                "profileImageUrl" : CurrentUserProfile.instanc.currentProfileImageURL,
+                                "postedBy" :  Auth.auth().currentUser?.email!,
+                                "foodType": self.foodTypeTextField.text!,
+                                "foodDescription": self.foodDescLabel.text!,
+                                "foodName" : self.foodNameTextField.text!, "date" : FieldValue.serverTimestamp(),
+                                "likes" :  0]  as [String : Any]
                             firestoreReference = firestoreDatabase.collection("Posts").addDocument(data: firestorePost, completion: { (error) in
                                 
                                 if error != nil {
@@ -149,6 +159,7 @@ class RecipePostViewController: UIViewController,UIImagePickerControllerDelegate
     } // end of upload function
     
     @IBAction func saveButtonPressed(_ sender: Any) {
+        
         uploadPostToFirease()
         dismiss(animated: true, completion: nil)
     } // end of save button
