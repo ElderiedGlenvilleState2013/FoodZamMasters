@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		632A2B6124EED5F1000D06B0 /* CurrentUserStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632A2B6024EED5F1000D06B0 /* CurrentUserStruct.swift */; };
 		6331C11024CE75EE003BF041 /* ProfileVCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6331C10F24CE75EE003BF041 /* ProfileVCViewController.swift */; };
+		633E3DE724F06B850034701C /* FinalFoodClassifier.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 633E3DE624F06B850034701C /* FinalFoodClassifier.mlmodel */; };
+		633E3DE924F0721A0034701C /* DetectStructModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633E3DE824F0721A0034701C /* DetectStructModel.swift */; };
+		633E3DEB24F08F6B0034701C /* NewFoodImageClassifier.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 633E3DEA24F08F6B0034701C /* NewFoodImageClassifier.mlmodel */; };
 		637AFD2324B12A9F00FD285A /* TestFoodClassifier.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 637AFD2224B12A9F00FD285A /* TestFoodClassifier.mlmodel */; };
 		637AFD2524B12B1700FD285A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 637AFD2424B12B1700FD285A /* GoogleService-Info.plist */; };
 		637AFD2824B17EE900FD285A /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637AFD2724B17EE900FD285A /* LoginVC.swift */; };
@@ -30,6 +33,9 @@
 		4B7E6DF1D449AFFA61D9AB1A /* Pods-FoodZam.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodZam.debug.xcconfig"; path = "Target Support Files/Pods-FoodZam/Pods-FoodZam.debug.xcconfig"; sourceTree = "<group>"; };
 		632A2B6024EED5F1000D06B0 /* CurrentUserStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUserStruct.swift; sourceTree = "<group>"; };
 		6331C10F24CE75EE003BF041 /* ProfileVCViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVCViewController.swift; sourceTree = "<group>"; };
+		633E3DE624F06B850034701C /* FinalFoodClassifier.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = FinalFoodClassifier.mlmodel; sourceTree = "<group>"; };
+		633E3DE824F0721A0034701C /* DetectStructModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetectStructModel.swift; sourceTree = "<group>"; };
+		633E3DEA24F08F6B0034701C /* NewFoodImageClassifier.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = NewFoodImageClassifier.mlmodel; sourceTree = "<group>"; };
 		637AFD2224B12A9F00FD285A /* TestFoodClassifier.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = TestFoodClassifier.mlmodel; sourceTree = "<group>"; };
 		637AFD2424B12B1700FD285A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		637AFD2724B17EE900FD285A /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
@@ -84,6 +90,7 @@
 			isa = PBXGroup;
 			children = (
 				632A2B6024EED5F1000D06B0 /* CurrentUserStruct.swift */,
+				633E3DE824F0721A0034701C /* DetectStructModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -109,10 +116,12 @@
 		63D9910E24A87B4F00538FD1 /* FoodZam */ = {
 			isa = PBXGroup;
 			children = (
+				633E3DE624F06B850034701C /* FinalFoodClassifier.mlmodel */,
 				633B889524D391F0001A7F1F /* View */,
 				637AFD2624B1317700FD285A /* Model */,
 				63D9912324A87B8A00538FD1 /* Controllers */,
 				63D9910F24A87B4F00538FD1 /* AppDelegate.swift */,
+				633E3DEA24F08F6B0034701C /* NewFoodImageClassifier.mlmodel */,
 				63D9911124A87B4F00538FD1 /* SceneDelegate.swift */,
 				637AFD2224B12A9F00FD285A /* TestFoodClassifier.mlmodel */,
 				637AFD2424B12B1700FD285A /* GoogleService-Info.plist */,
@@ -266,6 +275,8 @@
 				63D9911024A87B4F00538FD1 /* AppDelegate.swift in Sources */,
 				637AFD2824B17EE900FD285A /* LoginVC.swift in Sources */,
 				63D9911224A87B4F00538FD1 /* SceneDelegate.swift in Sources */,
+				633E3DEB24F08F6B0034701C /* NewFoodImageClassifier.mlmodel in Sources */,
+				633E3DE924F0721A0034701C /* DetectStructModel.swift in Sources */,
 				632A2B6124EED5F1000D06B0 /* CurrentUserStruct.swift in Sources */,
 				63E28B8C24D3B8FC008B45C0 /* RecipeViewController.swift in Sources */,
 				63E28B8A24D3B8AA008B45C0 /* RecipeCell.swift in Sources */,
@@ -273,6 +284,7 @@
 				63E28B8824D3B88C008B45C0 /* RecipePostViewController.swift in Sources */,
 				637AFD2324B12A9F00FD285A /* TestFoodClassifier.mlmodel in Sources */,
 				63D9912924A8907F00538FD1 /* SetbudgetVC.swift in Sources */,
+				633E3DE724F06B850034701C /* FinalFoodClassifier.mlmodel in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -427,7 +439,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.FoodZam;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -446,7 +458,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.FoodZam;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

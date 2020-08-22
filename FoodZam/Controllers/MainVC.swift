@@ -74,8 +74,14 @@ class MainVC: UIViewController, UINavigationControllerDelegate,UIImagePickerCont
           
           
       }
+    
+
+    
     func detect(image: CIImage){
-        guard let model = try? VNCoreMLModel(for: TestFoodClassifier().model) else {
+        
+        
+        
+        guard let model = try? VNCoreMLModel(for: NewFoodImageClassifier().model) else {
             fatalError("loading CoreML Model failed")
         }
         
@@ -84,69 +90,224 @@ class MainVC: UIViewController, UINavigationControllerDelegate,UIImagePickerCont
                 fatalError("model failed to process image")
             }
             print(results)
-            if let oreoResults = results.first {
-                if oreoResults.identifier.contains("Oreo") {
-                    self.identfierName = oreoResults.identifier
-                    self.budgetPrice -= self.bp
-                 //   self.budgetPrice -= 3.45
-                    self.navigationItem.title = "$\(self.budgetPrice)"
-                    self.foodNameLbl.text = oreoResults.identifier;
-                    self.navigationController?.navigationBar.barTintColor = UIColor.green
-                    self.navigationController?.navigationBar.isTranslucent = false
-                    self.synthesizeSpeech(fromString: " I believe this is a \(oreoResults.identifier)")
-                    
-                } else if let appleResults = results.first {
-                    if appleResults.identifier.contains("Apples") {
-                        self.identfierName = appleResults.identifier
-                        self.navigationItem.title = "$\(self.budgetPrice)"
-                        self.foodNameLbl.text = "Apples"
+            
+            if let grapeResult = results.first {
+                if grapeResult.identifier.contains("Grapes") {
+                        self.identfierName = grapeResult.identifier
+                                                  //self.budgetPrice -= self.bp
+
+                                                //  self.addingItemToBudget()
+                        self.foodNameLbl.text = "Grapes"
                         self.navigationController?.navigationBar.barTintColor = UIColor.green
-                    } else {
-                        if let grapeResult = results.first {
-                            if grapeResult.identifier.contains("Grapes") {
-                                self.identfierName = grapeResult.identifier
-                                //self.budgetPrice -= self.bp
-                              
-                              //  self.addingItemToBudget()
-                                self.foodNameLbl.text = "Grapes"
-                                self.navigationController?.navigationBar.barTintColor = UIColor.green
-                                
-                            }
+                        self.synthesizeSpeech(fromString: " I believe this is a \(grapeResult.identifier)")
+
+                } else {
+                    
+                    if let dogAResults = results.first {
+                        if dogAResults.identifier.contains("(1) Great Value Premium Fully Cooked Chunk Chicken, 12.5 oz") {
+                            self.identfierName = dogAResults.identifier
+                                                      //self.budgetPrice -= self.bp
+
+                                                    //  self.addingItemToBudget()
+                            self.foodNameLbl.text = "(1) Great Value Premium Fully Cooked Chunk Chicken, 12.5 oz"
+                            self.navigationController?.navigationBar.barTintColor = UIColor.green
+                            self.synthesizeSpeech(fromString: " I believe this is a \(dogAResults.identifier)")
                         } else {
-                            if let iceCreamResult = results.first {
-                                if iceCreamResult.identifier.contains("Great Value Vanilla Ice Cream") {
-                                    self.identfierName = iceCreamResult.identifier
-                                    self.navigationItem.title = "$\(self.budgetPrice)"
-                                    self.navigationController?.navigationBar.barTintColor = UIColor.green
-                                    self.foodNameLbl.text = iceCreamResult.identifier
-                                }
-                            } else {
-                                if let bananaResult = results.first {
-                                    if bananaResult.identifier.contains("Banana") {
-                                        self.identfierName = bananaResult.identifier
-                                        //self.budgetPrice -= 1.50
-                                        self.navigationItem.title = "$\(self.budgetPrice)"
-                                        self.navigationController?.navigationBar.barTintColor = UIColor.green
-                                        self.foodNameLbl.text = "Banana"
-                                        
-                                    }
+                            
+                            if let firstResults = results.first {
+                                if firstResults.identifier.contains("Newtons Soft & fruit Chewy Fig Cookies, 10 oz Pack") {
+                                   self.identfierName = firstResults.identifier
+                                                             //self.budgetPrice -= self.bp
+
+                                                           //  self.addingItemToBudget()
+                                   self.foodNameLbl.text = "Newtons Soft & fruit Chewy Fig Cookies, 10 oz Pack"
+                                   self.navigationController?.navigationBar.barTintColor = UIColor.green
+                                   self.synthesizeSpeech(fromString: " I believe this is a \(firstResults.identifier)")
+                                    
                                 } else {
-                                    self.navigationItem.title = "$\(self.budgetPrice)"
-                                    self.foodNameLbl.text = "N/A"
-                                    self.priceLbl.text = "0.0"
+                                    if let secondResults = results.first {
+                                        if secondResults.identifier.contains("Apples") {
+                                          self.identfierName = secondResults.identifier
+                                                                    //self.budgetPrice -= self.bp
+
+                                                                  //  self.addingItemToBudget()
+                                          self.foodNameLbl.text = "Apples"
+                                          self.navigationController?.navigationBar.barTintColor = UIColor.green
+                                          self.synthesizeSpeech(fromString: " I believe this is a \(secondResults.identifier)")
+                                            
+                                        } else {
+                                            if let thirdResults = results.first {
+                                                if thirdResults.identifier.contains("Banana") {
+                                                   self.identfierName = grapeResult.identifier
+                                                                             //self.budgetPrice -= self.bp
+
+                                                                           //  self.addingItemToBudget()
+                                                   self.foodNameLbl.text = "Banana"
+                                                   self.navigationController?.navigationBar.barTintColor = UIColor.green
+                                                    self.synthesizeSpeech(fromString: "I believe this is a \(thirdResults.identifier)")
+                                                } else {
+                                                    if let fourthResults = results.first {
+                                                        if fourthResults.identifier.contains("Beech-Nut Pouches, In-Store Purchase Only") {
+                                                         self.identfierName = fourthResults.identifier
+                                                                                   //self.budgetPrice -= self.bp
+
+                                                                                 //  self.addingItemToBudget()
+                                                         self.foodNameLbl.text = "Beech-Nut Pouches, In-Store Purchase Only"
+                                                         self.navigationController?.navigationBar.barTintColor = UIColor.green
+                                                            self.synthesizeSpeech(fromString: " I believe this is a \(fourthResults.identifier)")
+                                                            
+                                                        } else {
+                                                            if let fifthResults = results.first {
+                                                                if fifthResults.identifier.contains("Oreo") {
+                                                             self.identfierName = grapeResult.identifier
+                                                                                                                                   //self.budgetPrice -= self.bp
+
+                                                                                                                                 //  self.addingItemToBudget()
+                                                                                                         self.foodNameLbl.text = "Oreo"
+                                                                                                         self.navigationController?.navigationBar.barTintColor = UIColor.green
+                                                                                                          
+                                                                    self.synthesizeSpeech(fromString: " I believe this is a \(fifthResults.identifier)")
+                                                                    
+                                                                } else {
+                                                                    if let sixthResults = results.first {
+                                                                        if sixthResults.identifier.contains("Lay's Barbecue Flavored Potato Chips, Party Size, 12.5 oz Bag") {
+                                                                            
+                                                                            self.identfierName = sixthResults.identifier
+                                                                                                      //self.budgetPrice -= self.bp
+
+                                                                                                    //  self.addingItemToBudget()
+                                                                            self.foodNameLbl.text = "Lay's Barbecue Flavored Potato Chips, Party Size, 12.5 oz Bag"
+                                                                            self.navigationController?.navigationBar.barTintColor = UIColor.green
+                                                                           
+                                                                            self.synthesizeSpeech(fromString: " I believe this is a \(sixthResults.identifier)")
+                                                                            
+                                                                        } else {
+                                                                            if let seventhResults = results.first {
+                                                                                if seventhResults.identifier.contains("belVita Cinnamon Brown Sugar Breakfast Biscuits, 5 Packs (4 Biscuits Per Pack)") {
+                                                                                    
+                                                                                    self.identfierName = seventhResults.identifier
+                                                                                                                                                                                        //self.budgetPrice -= self.bp
+
+                                                                                                                                                                                      //  self.addingItemToBudget()
+                                                                                                                                                              self.foodNameLbl.text = "belVita Cinnamon Brown Sugar Breakfast Biscuits, 5 Packs (4 Biscuits Per Pack)"
+                                                                                    
+                                                                                    self.navigationController?.navigationBar.barTintColor = UIColor.green
+                                                                                 
+
+
+                                                                                    self.navigationController?.navigationBar.isTranslucent = false
+                                                                                    self.synthesizeSpeech(fromString: " I believe this is a \(seventhResults.identifier)")
+                                                                                    
+                                                                                } else {
+                                                                                    if let eightResults = results.first {
+                                                                                        
+                                                                                        if eightResults.identifier.contains("Cool Ranch Doritos") {
+                                                                                            
+                                                                                           
+                                                                                            
+                                                                                            self.identfierName = eightResults.identifier
+                                                                                                                                                                                                 //self.budgetPrice -= self.bp
+
+                                                                                                                                                                                               //  self.addingItemToBudget()
+                                                                                                                                                                       self.foodNameLbl.text = "Cool Ranch Doritos"
+                                                                                            
+                                                                                            self.synthesizeSpeech(fromString: " I believe this is a \(eightResults.identifier)")
+                                                                                            
+                                                                                        } else {
+                                                                                            if let ninethResults = results.first {
+                                                                                                if ninethResults.identifier.contains("Garden Veggie Straws, Sea Salt, 14 oz") {
+                                                                                                    
+                                                                                                   
+                                                                                                    self.identfierName = ninethResults.identifier
+                                                                                                                              //self.budgetPrice -= self.bp
+
+                                                                                                                            //  self.addingItemToBudget()
+                                                                                                    self.foodNameLbl.text = "Garden Veggie Straws, Sea Salt, 14 oz"
+                                                                                                    
+                                                                                                    self.navigationController?.navigationBar.barTintColor = UIColor.green
+                                                                                                    self.navigationController?.navigationBar.isTranslucent = false
+                                                                                                    self.synthesizeSpeech(fromString: " I believe this is a \(ninethResults.identifier)")
+                                                                                                    
+                                                                                                } else {
+                                                                                                    if let tenResults = results.first {
+                                                                                                        if tenResults.identifier.contains("Lay's Dill Pickle Flavored Potato Chips, Party Size, 12.5 oz Bag") {
+                                                                                                          
+                                                                                                            self.identfierName = tenResults.identifier
+                                                                                                                                                                                                                                         //self.budgetPrice -= self.bp
+
+                                                                                                                                                                                                                                       //  self.addingItemToBudget()
+                                                                                                                                                                                                               self.foodNameLbl.text = "Lay's Dill Pickle Flavored Potato Chips, Party Size, 12.5 oz Bag"
+                                                                                                          
+                                                                                                            self.navigationController?.navigationBar.barTintColor = UIColor.green
+                                                                                                            self.navigationController?.navigationBar.isTranslucent = false
+                                                                                                            self.synthesizeSpeech(fromString: " I believe this is a \(tenResults.identifier)")
+                                                                                                            
+                                                                                                        } else {
+                                                                                                            if let huskyResults = results.first {
+                                                                                                                if huskyResults.identifier.contains("Bob’S Red Mill Flaxseed Meal, 16 Oz") {
+                                                                                                                    
+                                                                                                                  self.identfierName = huskyResults.identifier
+                                                                                                                                                                                                                                                                                                                                                          //self.budgetPrice -= self.bp
+
+                                                                                                                                                                                                                                                                                                                                                        //  self.addingItemToBudget()
+                                                                                                                                                                                                                                                                                                                                self.foodNameLbl.text = "Bob’S Red Mill Flaxseed Meal, 16 Oz"
+                                                                                                                
+                                                                                                                    self.navigationController?.navigationBar.barTintColor = UIColor.green
+                                                                                                                    self.navigationController?.navigationBar.isTranslucent = false
+                                                                                                                    self.synthesizeSpeech(fromString: " I believe this is a \(huskyResults.identifier)")
+                                                                                                                    
+                                                                                                                } else {
+                                                                                                                    self.navigationItem.title = "Sorry try again!"
+                                                                                                                    self.navigationController?.navigationBar.barTintColor = UIColor.red
+                                                                                                                    self.navigationController?.navigationBar.isTranslucent = false
+                                                                                                                    self.synthesizeSpeech(fromString: "I'm sorry, I couldn't find that item. Please try again!")
+                                                                                                                    
+                                                                                                                }
+                                                                                                                
+                                                                                                            }
+                                                                                                        }
+                                                                                                    }
+                                                                                                    
+                                                                                                }
+                                                                                                
+                                                                                                
+                                                                                            }
+                                                                                            
+                                                                                        }
+                                                                                        
+                                                                                        
+                                                                                    }
+                                                                                    
+                                                                                }
+                                                                                
+                                                                                
+                                                                            }
+                                                                            
+                                                                        }
+                                                                        
+                                                                        
+                                                                    }
+                                                                    
+                                                                }
+                                                                
+                                                                
+                                                            }
+                                                        }
+                                                        
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
                                 }
                             }
+                            
                         }
                     }
+                    
                 }
-            }else {
-                self.foodNameLbl.text = "Cannot find that Item"
-                self.priceLbl.text = "0.0"
-                self.navigationItem.title = "Cannot find item"
-                self.view.backgroundColor = UIColor.red
-                self.navigationController?.navigationBar.barTintColor = UIColor.red
+                
             }
-            
         }
         
         let handler = VNImageRequestHandler(ciImage: image)
@@ -155,10 +316,8 @@ class MainVC: UIViewController, UINavigationControllerDelegate,UIImagePickerCont
         }
         catch {
             print(error)
-            
         }
     }
-    
     
    
    
